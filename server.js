@@ -1,3 +1,4 @@
+var os = require('os')
 var express = require('express')
 var pretty = require('express-prettify')
 var bodyParser = require('body-parser');
@@ -8,7 +9,7 @@ app.use(pretty({ query: 'pretty' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 1234;
+var port = process.env.PORT || 8080;
 var router = express.Router();
 
 app.all("/*", function (req, res, next) {
@@ -61,6 +62,7 @@ router.get('/', function (req, res) {
 function headers(req, res) {
     res.json({
         result: true,
+        hostname: os.hostname(),
         headers: req.headers,
         query: req.query,
         body: req.body,
