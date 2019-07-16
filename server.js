@@ -32,30 +32,29 @@ router.get('/', function (req, res) {
         {
             method: "GET, POST",
             desc: "GET demo",
-            url: req.prefix + '/api/demo/headers'
+            url: req.prefix + '/demo/headers'
         },
         {
             method: "GET",
             desc: "GET demo",
-            url: req.prefix + '/api/demo/demo'
+            url: req.prefix + '/demo/demo'
         },
         {
             method: "PUT",
             desc: "PUT demo",
-            url: req.prefix + '/api/demo/demo'
+            url: req.prefix + '/demo/demo'
         },
         {
             method: "DELETE",
             desc: "DELETE demo",
-            url: req.prefix + '/api/demo/demo'
+            url: req.prefix + '/demo/demo'
         },
         {
             method: "POST",
             desc: "POST demo",
-            url: req.prefix + '/api/demo/demo'
+            url: req.prefix + '/demo/demo'
         },
     ]
-    //res.json ({message: 'hello'});
     res.json({ api: apis });
 });
 
