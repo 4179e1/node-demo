@@ -4,6 +4,7 @@
     "dependencies": {
         "express": "",
         "body-parser": "",
-        "express-prettify": ""
+        "express-prettify": "",
+        "console-stamp": ""
     }
 }
