@@ -149,8 +149,8 @@ function load_config() {
         console.log("Using config: ", global.config)
     }
 }
-function sighup_handler(signal) {
-    console.log(`Recieved ${signal}`);
+function sighup_handler() {
+    console.log("Recieved SIGHUP");
     load_config();
 }
 
