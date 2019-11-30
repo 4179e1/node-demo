@@ -79,6 +79,11 @@ router.get('/', function (req, res) {
             url: req.prefix + '/demo/demo'
         },
         {
+            method: "PATCH",
+            desc: "PATCH demo",
+            url: req.prefix + '/demo/demo'
+        },
+        {
             method: "DELETE",
             desc: "DELETE demo",
             url: req.prefix + '/demo/demo'
@@ -112,25 +117,47 @@ router.route('/demo/config')
     })
 
 router.route('/demo/demo')
-    // curl -H "Content-Type: application/json" -X PUT -d '{}' http://localhost:1234/api/demo/demo
+    // curl -H "Content-Type: application/json" -X GET -d '{}' http://localhost:8080/api/demo/demo
     .get(function (req, res) {
-        res.json({ result: true });
+        console.log(req);
+        res.json({
+            method: req.method,
+            result: true
+        });
     })
 
-    // curl -X PUT -d '{}' http://localhost:1234/api/demo/demo
+    // curl -X PUT -d '{}' http://localhost:8080/api/demo/demo
     .put(function (req, res) {
-        res.json({ result: true });
+        res.json({
+            method: req.method,
+            body: req.body,
+            result: true
+        });
     })
 
-    // curl -X DELETE http://localhost:1234/api/demo/demo
+    // curl -X DELETE http://localhost:8080/api/demo/demo
     .delete(function (req, res) {
-        res.json({ result: true });
+        res.json({
+            method: req.method,
+            result: true
+        });
     })
 
-    // curl -H "Content-Type: application/json" -X POST -d '{}' http://localhost:1234/api/demo/demo
+    // curl -H "Content-Type: application/json" -X POST -d '{}' http://localhost:8080/api/demo/demo
     .post(function (req, res) {
+        res.json({
+            method: req.method,
+            body: req.body,
+            result: true
+        });
+    })
 
-        res.json({ result: true });
+    .patch(function (req, res) {
+        res.json({
+            method: req.method,
+            body: req.body,
+            result: true
+        });
     });
 
 app.use('/api', router);
