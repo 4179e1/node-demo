@@ -35,8 +35,10 @@ console.log = function () {
 };
 
 app.use(pretty({ query: 'pretty' }));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
+app.use(express.urlencoded())
+app.use(express.json())
 
 var port = process.env.PORT || 8080;
 var router = express.Router();
@@ -51,7 +53,7 @@ router.use(function (req, res, next) {
     console.log(req.prefix);
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH");
     next();
 });
 
@@ -110,6 +112,9 @@ function headers(req, res) {
 router.route('/demo/headers')
     .get(headers)
     .post(headers)
+    .put(headers)
+    .patch(headers)
+    .delete(headers)
 
 router.route('/demo/config')
     .get(function (req, res) {
@@ -119,7 +124,6 @@ router.route('/demo/config')
 router.route('/demo/demo')
     // curl -H "Content-Type: application/json" -X GET -d '{}' http://localhost:8080/api/demo/demo
     .get(function (req, res) {
-        console.log(req);
         res.json({
             method: req.method,
             result: true
@@ -152,6 +156,7 @@ router.route('/demo/demo')
         });
     })
 
+    // curl -H "Content-Type: application/json" -X PATCH -d '{}' http://localhost:8080/api/demo/demo
     .patch(function (req, res) {
         res.json({
             method: req.method,
