@@ -121,49 +121,32 @@ router.route('/demo/config')
         res.json(global.config)
     })
 
+function demo(req, res) {
+    res.json({
+        result: true,
+        hostname: os.hostname(),
+        headers: req.headers,
+        query: req.query,
+        body: req.body,
+    });
+};
+
+
 router.route('/demo/demo')
     // curl -H "Content-Type: application/json" -X GET -d '{}' http://localhost:8080/api/demo/demo
-    .get(function (req, res) {
-        res.json({
-            method: req.method,
-            result: true
-        });
-    })
+    .get(demo)
 
     // curl -X PUT -d '{}' http://localhost:8080/api/demo/demo
-    .put(function (req, res) {
-        res.json({
-            method: req.method,
-            body: req.body,
-            result: true
-        });
-    })
+    .put(demo)
 
     // curl -X DELETE http://localhost:8080/api/demo/demo
-    .delete(function (req, res) {
-        res.json({
-            method: req.method,
-            result: true
-        });
-    })
+    .delete(demo)
 
-    // curl -H "Content-Type: application/json" -X POST -d '{}' http://localhost:8080/api/demo/demo
-    .post(function (req, res) {
-        res.json({
-            method: req.method,
-            body: req.body,
-            result: true
-        });
-    })
+    // curl -H "Content-Type: application/json" -X POST -d '{"hello": "world"}' http://localhost:8080/api/demo/demo
+    .post(demo)
 
     // curl -H "Content-Type: application/json" -X PATCH -d '{}' http://localhost:8080/api/demo/demo
-    .patch(function (req, res) {
-        res.json({
-            method: req.method,
-            body: req.body,
-            result: true
-        });
-    });
+    .patch(demo)
 
 app.use('/api', router);
 
